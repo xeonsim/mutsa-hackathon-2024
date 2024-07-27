@@ -63,9 +63,9 @@ export default function Signup() {
             } else {
               if (!submitted) {
                 const userData = {
-                  name: encode(inputs.name.value),
-                  email: encode(inputs.email.value),
-                  phone: encode(phoneNum),
+                  name: inputs.name.value,
+                  email: inputs.email.value,
+                  phone: phoneNum,
                 };
                 setSubmitted(true);
                 createUserWithEmailAndPassword(

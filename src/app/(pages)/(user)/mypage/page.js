@@ -18,8 +18,8 @@ export default function MyPage() {
         const ref = doc(db, "users", userAuth.uid);
         getDoc(ref).then((res) => {
           const data = res.data();
-          setUserName(decode(data.name));
-          setUserEmail(decode(data.email));
+          setUserName(data.name);
+          setUserEmail(data.email);
         });
       } else {
         router.push("/");
