@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/app/firebase/firebaseClient";
+import { auth } from "@/firebase/firebaseClient";
 
 export default function Login() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function Login() {
         >
           <div>
             <div>
-               <div>Login!</div>
+              <div>Login!</div>
             </div>
             <div>
               <div>

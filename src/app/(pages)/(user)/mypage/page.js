@@ -1,6 +1,6 @@
 "use client";
 
-import { auth, db } from "@/app/firebase/firebaseClient";
+import { auth, db } from "@/firebase/firebaseClient";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";

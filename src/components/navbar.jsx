@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { auth } from "@/app/firebase/firebaseClient";
+import { auth } from "@/firebase/firebaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 
 export const Navbar = () => {
