@@ -40,12 +40,14 @@ export default async function Page(props) {
                 <p>완료여부: {e.fulfilled ? "완료" : "미완료"}</p>
               </div>
               <div>
-                <Link
-                  href={`/performDeclaration/${uid}/${props.params.groupId}/${e.id}`}
-                  className="bg-blue-400 rounded"
-                >
-                  선언 수행
-                </Link>
+                {!e.fulfilled && (
+                  <Link
+                    href={`/performDeclaration/${uid}/${props.params.groupId}/${e.id}`}
+                    className="bg-blue-400 rounded"
+                  >
+                    선언 수행
+                  </Link>
+                )}
               </div>
             </div>
             <ExerciseAccordion exercises={e.exercises} />
