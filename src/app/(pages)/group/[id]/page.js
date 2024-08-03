@@ -25,38 +25,60 @@ export default async function Page(props) {
   const otherMembers = groupDetail.members.filter((e) => e != uid);
 
   return (
-    <div>
-      <div>
-        <p>{groupDetail.name}</p>
-        <p>Creator: {creatorDetail.name}</p>
-        <p>운동: {groupDetail.exercise.join(", ")}</p>
-        <p>보증금: {groupDetail.deposit.toLocaleString()}원</p>
-        <p>기간: {groupDetail.duration}주</p>
-        <p>최대 인원: {groupDetail.people}명</p>
-        <p>현재 인원: {groupDetail.members.length}명</p>
-        <p>최소 달성 횟수: {groupDetail.minFulfill}회</p>
+    <div className="container mx-auto px-layout">
+      <div className="bg-white shadow-md rounded-layout p-layout mb-layout">
+        <h2 className="text-2xl font-bold text-secondary-700 mb-4">
+          {groupDetail.name}
+        </h2>
+        <p className="text-secondary-500 mb-2">Creator: {creatorDetail.name}</p>
+        <p className="text-secondary-500 mb-2">
+          운동: {groupDetail.exercise.join(", ")}
+        </p>
+        <p className="text-secondary-500 mb-2">
+          보증금: {groupDetail.deposit.toLocaleString()}원
+        </p>
+        <p className="text-secondary-500 mb-2">
+          기간: {groupDetail.duration}주
+        </p>
+        <p className="text-secondary-500 mb-2">
+          최대 인원: {groupDetail.people}명
+        </p>
+        <p className="text-secondary-500 mb-2">
+          현재 인원: {groupDetail.members.length}명
+        </p>
+        <p className="text-secondary-500 mb-2">
+          최소 달성 횟수: {groupDetail.minFulfill}회
+        </p>
       </div>
-      <div className="mt-3">
+      <div className="mt-layout">
         {!groupDetail.members.includes(uid) ? (
           <JoinButton groupId={groupData.id} members={groupDetail.members} />
         ) : (
           <Link
             href={`/createDeclaration/${groupData.id}`}
-            className="border rounded bg-gray-100 p-2 mt-10"
+            className="bg-accent-500 text-white font-bold py-2 px-4 rounded-layout hover:bg-accent-700 transition duration-300"
           >
             선언하기
           </Link>
         )}
       </div>
-      <div className="mt-3">
-        <h3>내 정보</h3>
-        <MemberCard uid={uid} groupId={props.params.id} />
+      <div className="mt-layout">
+        <h3 className="text-xl font-semibold text-secondary-700 mb-4">
+          내 정보
+        </h3>
+        <div className="space-y-4">
+          <MemberCard uid={uid} groupId={props.params.id} />
+        </div>
       </div>
-      <div>
-        <h3>Other Members</h3>
-        {otherMembers.map((e, index) => (
-          <MemberCard key={index} uid={e} groupId={props.params.id} />
-        ))}
+      <div className="mt-layout">
+        <h3 className="text-xl font-semibold text-secondary-700 mb-4">
+          다른 멤버
+        </h3>
+        <div className="space-y-4">
+          {otherMembers.map((e, index) => (
+            <MemberCard key={index} uid={e} groupId={props.params.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

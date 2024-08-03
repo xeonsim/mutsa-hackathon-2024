@@ -114,31 +114,39 @@ const ExerciseForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="input-group">
-        <label>수행 날짜:</label>
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-layout">
+      <div className="mb-layout">
+        <label className="block text-secondary-700 font-bold mb-2">
+          수행 날짜:
+        </label>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           required
+          className="w-full p-2 border border-secondary-100 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
       </div>
-      <div className="input-group">
-        <label>설명:</label>
+      <div className="mb-layout">
+        <label className="block text-secondary-700 font-bold mb-2">설명:</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="운동 설명을 입력하세요"
           required
+          className="w-full p-2 border border-secondary-100 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500 h-32"
         />
       </div>
-      <div className="flex flex-col p-3">
+      <div className="space-y-4 mb-layout">
         {exercises.map((exercise, index) => (
-          <div key={index} className="border rounded w-96">
+          <div
+            key={index}
+            className="border border-secondary-100 rounded-layout p-4"
+          >
             <select
               value={exercise.type}
               onChange={(e) => handleExerciseTypeChange(index, e.target.value)}
+              className="w-full p-2 mb-2 border border-secondary-100 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="">운동 종류 선택</option>
               {mandatoryExercises.map((type) => (
@@ -148,7 +156,7 @@ const ExerciseForm = (props) => {
               ))}
             </select>
             {exercise.sets.map((set, setIndex) => (
-              <div key={setIndex} className="set-group">
+              <div key={setIndex} className="flex items-center mb-2">
                 <input
                   type="number"
                   placeholder="횟수"
@@ -156,35 +164,48 @@ const ExerciseForm = (props) => {
                   onChange={(e) =>
                     handleChange(index, setIndex, e.target.value)
                   }
+                  className="flex-grow p-2 border border-secondary-100 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500 mr-2"
                 />
                 <button
                   type="button"
                   onClick={() => handleRemoveSet(index, setIndex)}
+                  className="bg-secondary-500 text-white px-3 py-1 rounded-layout hover:bg-secondary-700 transition duration-300"
                 >
                   삭제
                 </button>
               </div>
             ))}
             <div className="flex gap-2">
-              <button type="button" onClick={() => handleAddSet(index)}>
-                + Add more
+              <button
+                type="button"
+                onClick={() => handleAddSet(index)}
+                className="bg-primary-500 text-white px-3 py-1 rounded-layout hover:bg-primary-700 transition duration-300"
+              >
+                세트 추가
               </button>
-              <button type="button" onClick={() => handleRemoveExercise(index)}>
+              <button
+                type="button"
+                onClick={() => handleRemoveExercise(index)}
+                className="bg-secondary-500 text-white px-3 py-1 rounded-layout hover:bg-secondary-700 transition duration-300"
+              >
                 운동 삭제
               </button>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col space-y-2">
         <button
           type="button"
-          className="rounded p-3 bg-black text-white w-24"
           onClick={handleAddExercise}
+          className="bg-primary-500 text-white font-bold py-2 px-4 rounded-layout hover:bg-primary-700 transition duration-300"
         >
           운동 추가
         </button>
-        <button type="submit" className="rounded p-3 bg-black text-white w-24">
+        <button
+          type="submit"
+          className="bg-accent-500 text-white font-bold py-2 px-4 rounded-layout hover:bg-accent-700 transition duration-300"
+        >
           선언 제출
         </button>
       </div>
