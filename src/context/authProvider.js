@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         nookies.destroy(null, "token");
         nookies.set(null, "token", "", { path: "/" });
-        if (!path.startsWith("/singup") || !path.startsWith("/login")) {
+        if (!path.startsWith("/signup") && !path.startsWith("/login")) {
           router.replace("/login");
         }
       } else {
