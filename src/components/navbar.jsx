@@ -29,7 +29,7 @@ export const Navbar = () => {
       {/* Logo */}
       <Link href="/" className="flex items-center space-x-3">
         <h1 className="self-center md:text-2xl text-lg font-semibold whitespace-nowrap text-white">
-          main{" "}
+          LOGO
         </h1>
       </Link>
 
@@ -84,7 +84,7 @@ export const Navbar = () => {
         {/* Mobile Logo */}
         <Link href="/" className="flex items-center space-x-3 pt-5 pb-10">
           <h1 className="self-center md:text-2xl text-lg font-semibold whitespace-nowrap text-white">
-            main
+            LOGO
           </h1>
         </Link>
 
@@ -104,6 +104,14 @@ function NavItems({ logggedIn }) {
           className="font-bold block m-3 mx-6 text-white hover:text-yellow-300"
         >
           Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/group"
+          className="font-bold block m-3 mx-6 text-white hover:text-yellow-300"
+        >
+          Groups
         </Link>
       </li>
       <li>

@@ -20,15 +20,13 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         nookies.destroy(null, "token");
         nookies.set(null, "token", "", { path: "/" });
+        if (!path.startsWith("/singup") || !path.startsWith("/login")) {
+          router.replace("/login");
+        }
       } else {
         const token = await user.getIdToken();
         setUser(user);
         nookies.set(null, "token", token, { path: "/" });
-        if (path.startsWith("/admin")) {
-          if (user.email != process.env.NEXT_PUBLIC_APP_EMAIL) {
-            router.replace("/");
-          }
-        }
       }
     });
   }, [router, path]);

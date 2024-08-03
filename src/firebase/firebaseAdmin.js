@@ -1,4 +1,4 @@
-import serviceAccount from "./gba-seminar-firebase-adminsdk-ua3ar-ee9be10fb9.json";
+import serviceAccount from "./secret.json";
 
 // app/firebaseAdmin.js
 import { initializeApp, getApps, cert } from "firebase-admin/app";
@@ -15,18 +15,6 @@ export function initializeFirebaseAdmin() {
 }
 
 export { getAuth };
-
-export async function adminUpdateUser(uid, isDisabled) {
-  initializeFirebaseAdmin();
-  return getAuth().updateUser(uid, {
-    disabled: isDisabled,
-  });
-}
-
-export async function adminDeleteUser(uid) {
-  initializeFirebaseAdmin();
-  return getAuth().deleteUser(uid);
-}
 
 export async function verifyIdToken(token) {
   initializeFirebaseAdmin();
