@@ -1,4 +1,4 @@
-import serviceAccount from "./test-secret.json";
+import serviceAccount from "./test.json";
 
 // app/firebaseAdmin.js
 import { initializeApp, getApps, cert } from "firebase-admin/app";
