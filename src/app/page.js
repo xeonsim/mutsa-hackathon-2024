@@ -26,9 +26,11 @@ export default async function Home() {
     });
 
     return (
-      <div>
-        <h1>나의 그룹</h1>
-        <div>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-secondary-700 mb-6">
+          나의 그룹
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {joinedGroups.map(async (e, i) => {
             const starttime = new Date(e.timestamp);
             const declarationData = await getDocs(
@@ -43,19 +45,41 @@ export default async function Home() {
               <Link
                 key={i}
                 href={`/group/${e.id}`}
-                className="border m-3 flex p-3 justify-between"
+                className="bg-white shadow-md rounded-layout p-6 hover:shadow-lg transition duration-300"
               >
-                <p>{e.name}</p>
-                <p>운동: {e.exercise.join(", ")}</p>
-                <p>
-                  멤버수: {e.members.length}/{e.people}
-                </p>
-                <p>보증금 : {e.deposit}</p>
-                <p>시작일 : {starttime.toISOString().slice(0, 10)}</p>
-                <p>기간 : {e.duration}</p>
-                <p>
-                  목표달성 횟수 : {done.length}/{e.minFulfill}
-                </p>
+                <h2 className="text-xl font-semibold text-secondary-700 mb-4">
+                  {e.name}
+                </h2>
+                <div className="space-y-2 text-secondary-500">
+                  <p>
+                    <span className="font-medium">운동:</span>{" "}
+                    {e.exercise.join(", ")}
+                  </p>
+                  <p>
+                    <span className="font-medium">멤버수:</span>{" "}
+                    {e.members.length}/{e.people}
+                  </p>
+                  <p>
+                    <span className="font-medium">보증금:</span>{" "}
+                    {e.deposit.toLocaleString()}원
+                  </p>
+                  <p>
+                    <span className="font-medium">시작일:</span>{" "}
+                    {starttime.toISOString().slice(0, 10)}
+                  </p>
+                  <p>
+                    <span className="font-medium">기간:</span> {e.duration}주
+                  </p>
+                  <p>
+                    <span className="font-medium">목표달성 횟수:</span>{" "}
+                    {done.length}/{e.minFulfill}
+                  </p>
+                </div>
+                <div className="mt-4 text-right">
+                  <span className="inline-block bg-primary-500 text-white text-sm font-bold py-2 px-4 rounded-layout hover:bg-primary-700 transition duration-300">
+                    자세히 보기
+                  </span>
+                </div>
               </Link>
             );
           })}
