@@ -28,13 +28,12 @@ export default function Signup() {
     }
   }, [phoneNum]);
   return (
-    <div style={{ height: "80vh" }}>
-      <div>
+    <div className="min-h-screen flex items-center justify-center bg-secondary-100">
+      <div className="bg-white p-layout rounded-layout shadow-md w-full max-w-md">
         <form
           onSubmit={async (e) => {
             e.preventDefault();
             const inputs = e.target;
-            // Firebase fire storeage user database implement
             const phone_regex = new RegExp(
               "01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})"
             );
@@ -49,9 +48,9 @@ export default function Signup() {
               alert("Enter Your Phone Number Please");
               return;
             } else if (!phone_regex.test(phoneNum)) {
-              alert("Enter Your Phone Number Please22");
+              alert("Enter a Valid Phone Number Please");
               return;
-            } else if (inputs.pass.value == null || inputs.email.value == "") {
+            } else if (inputs.pass.value == null || inputs.pass.value == "") {
               alert("Enter Your Password Please");
               return;
             } else if (inputs.pass.value.length < 6) {
@@ -89,41 +88,61 @@ export default function Signup() {
               }
             }
           }}
+          className="space-y-6"
         >
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-secondary-700">LOGO</h2>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <input
+                placeholder="이름"
+                id="name"
+                type="text"
+                className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <input
+                placeholder="이메일"
+                id="email"
+                type="text"
+                className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <input
+                placeholder="휴대폰 번호"
+                onChange={handlePress}
+                value={phoneNum}
+                type="text"
+                className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <input
+                placeholder="비밀번호"
+                id="pass"
+                type="password"
+                className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            <div>
+              <input
+                placeholder="비밀번호 확인"
+                id="passCheck"
+                type="password"
+                className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+          </div>
           <div>
-            <div>
-              <div>Sign Up to join us</div>
-            </div>
-            <div>
-              <div>
-                <input placeholder="Name" id="name" type="text" />
-              </div>
-
-              <div>
-                <input placeholder="E-mail" id="email" type="text" />
-              </div>
-              <div>
-                <input
-                  placeholder="Phone Number"
-                  onChange={handlePress}
-                  value={phoneNum}
-                  type="text"
-                />
-              </div>
-              <div>
-                <input placeholder="Password" id="pass" type="password" />
-              </div>
-              <div>
-                <input
-                  placeholder="Password Check"
-                  id="passCheck"
-                  type="password"
-                />
-              </div>
-            </div>
-            <div>
-              <button type="submit">SignUp</button>
-            </div>
+            <button
+              type="submit"
+              className="w-full bg-primary-500 text-white font-bold py-3 px-4 rounded-layout hover:bg-primary-700 transition duration-300"
+            >
+              회원 가입
+            </button>
           </div>
         </form>
       </div>

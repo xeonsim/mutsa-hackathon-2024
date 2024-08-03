@@ -49,38 +49,56 @@ export default function Page() {
   };
 
   return (
-    <div className="">
-      <form onSubmit={handleSubmit}>
-        <div className="">
-          <label>이름</label>
+    <div className="container mx-auto px-layout py-layout">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-layout p-layout"
+      >
+        <h2 className="text-2xl font-bold text-secondary-700 mb-6">
+          새 그룹 만들기
+        </h2>
+        <div className="mb-4">
+          <label
+            className="block text-secondary-700 font-bold mb-2"
+            htmlFor="name"
+          >
+            이름
+          </label>
           <input
             type="text"
             id="name"
             name="name"
             value={name}
-            className="border"
-            placeholder="enter name..."
+            className="w-full p-3 border border-secondary-300 rounded-layout focus:outline-none focus:ring-2 focus:ring-primary-500"
+            placeholder="생성할 그룹명을 입력해 주세요."
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <label>운동</label>
-        <div className="flex">
-          {["스쿼트", "런지", "푸시업", "브릿지"].map((exercise) => (
-            <p key={exercise}>
-              <input
-                type="checkbox"
-                id={exercise}
-                name="exercises"
-                value={exercise}
-                checked={selectedExercises.includes(exercise)}
-                onChange={() => handleExerciseChange(exercise)}
-              />
-              <label htmlFor={exercise}>{exercise}</label>
-            </p>
-          ))}
+        <div className="mb-4">
+          <label className="block text-secondary-700 font-bold mb-2">
+            운동
+          </label>
+          <div className="flex flex-wrap gap-4">
+            {["스쿼트", "런지", "푸시업", "브릿지"].map((exercise) => (
+              <label key={exercise} className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="form-checkbox text-primary-500"
+                  checked={selectedExercises.includes(exercise)}
+                  onChange={() => handleExerciseChange(exercise)}
+                />
+                <span className="ml-2">{exercise}</span>
+              </label>
+            ))}
+          </div>
         </div>
-        <div className="">
-          <label>보증금</label>
+        <div className="mb-4">
+          <label
+            className="block text-secondary-700 font-bold mb-2"
+            htmlFor="deposit"
+          >
+            보증금
+          </label>
           <input
             type="range"
             id="deposit"
@@ -90,11 +108,19 @@ export default function Page() {
             step="1000"
             value={deposit}
             onChange={(e) => setDeposit(Number(e.target.value))}
+            className="w-full"
           />
-          <span id="depositValue">{deposit.toLocaleString()}원</span>
+          <span className="text-secondary-500">
+            {deposit.toLocaleString()}원
+          </span>
         </div>
-        <div className="">
-          <label htmlFor="duration">기간</label>
+        <div className="mb-4">
+          <label
+            className="block text-secondary-700 font-bold mb-2"
+            htmlFor="duration"
+          >
+            기간
+          </label>
           <input
             type="range"
             id="duration"
@@ -103,11 +129,17 @@ export default function Page() {
             max="52"
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
+            className="w-full"
           />
-          <span id="durationValue">{duration}주</span>
+          <span className="text-secondary-500">{duration}주</span>
         </div>
-        <div className="">
-          <label htmlFor="people">인원</label>
+        <div className="mb-4">
+          <label
+            className="block text-secondary-700 font-bold mb-2"
+            htmlFor="people"
+          >
+            인원
+          </label>
           <input
             type="range"
             id="people"
@@ -116,11 +148,17 @@ export default function Page() {
             max="10"
             value={people}
             onChange={(e) => setPeople(Number(e.target.value))}
+            className="w-full"
           />
-          <span id="peopleValue">{people}명</span>
+          <span className="text-secondary-500">{people}명</span>
         </div>
-        <div className="">
-          <label htmlFor="people">최소 달성 횟수</label>
+        <div className="mb-6">
+          <label
+            className="block text-secondary-700 font-bold mb-2"
+            htmlFor="fulfill"
+          >
+            최소 달성 횟수
+          </label>
           <input
             type="range"
             id="fulfill"
@@ -129,10 +167,14 @@ export default function Page() {
             max="100"
             value={minFulfill}
             onChange={(e) => setMinFulFill(Number(e.target.value))}
+            className="w-full"
           />
-          <span id="fulfillValue">{minFulfill}회</span>
+          <span className="text-secondary-500">{minFulfill}회</span>
         </div>
-        <button className="border" type="submit">
+        <button
+          className="bg-primary-500 text-white font-bold py-2 px-4 rounded-layout hover:bg-primary-700 transition duration-300"
+          type="submit"
+        >
           Create Group
         </button>
       </form>
