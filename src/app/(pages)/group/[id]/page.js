@@ -1,12 +1,13 @@
 // show group detail when entered
 
 import { db } from "@/firebase/firebaseClient";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { JoinButton } from "./joinButton";
 import { verifyIdToken } from "@/firebase/firebaseAdmin";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import MemberCard from "./memberCard";
+import { GroupCalendar } from "../../../../components/Calendar";
 
 export default async function Page(props) {
   const groupData = await getDoc(doc(db, "groups", props.params.id));
@@ -26,6 +27,7 @@ export default async function Page(props) {
 
   return (
     <div className="container mx-auto px-layout">
+      <GroupCalendar groupId={props.params.id} members={groupDetail.members} />
       <div className="bg-white shadow-md rounded-layout p-layout mb-layout">
         <h2 className="text-2xl font-bold text-secondary-700 mb-4">
           {groupDetail.name}
@@ -36,6 +38,9 @@ export default async function Page(props) {
         </p>
         <p className="text-secondary-500 mb-2">
           보증금: {groupDetail.deposit.toLocaleString()}원
+        </p>
+        <p className="text-secondary-500 mb-2">
+          Current Cash Pool: {groupDetail.cashPool.toLocaleString()}원
         </p>
         <p className="text-secondary-500 mb-2">
           기간: {groupDetail.duration}주
@@ -52,7 +57,11 @@ export default async function Page(props) {
       </div>
       <div className="mt-layout">
         {!groupDetail.members.includes(uid) ? (
-          <JoinButton groupId={groupData.id} members={groupDetail.members} />
+          <JoinButton
+            groupId={groupData.id}
+            members={groupDetail.members}
+            deposit={groupDetail.deposit}
+          />
         ) : (
           <Link
             href={`/createDeclaration/${groupData.id}`}

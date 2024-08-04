@@ -30,7 +30,6 @@ export default function Page() {
   });
   return (
     <div className="container mx-auto px-layout pt-8">
-      {" "}
       {/* Added top padding */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h2 className="text-3xl font-bold text-secondary-700 mb-4 md:mb-0">
@@ -64,6 +63,9 @@ export default function Page() {
               </p>
               <p className="text-secondary-500 mb-2">
                 보증금: {el.deposit.toLocaleString()}원
+              </p>
+              <p className="text-secondary-500 mb-2">
+                Current Cash Pool: {el.cashPool.toLocaleString()}원
               </p>
               <p className="text-secondary-500 mb-2">기간: {el.duration}주</p>
               <p className="text-secondary-500 mb-2">인원: {el.people}명</p>

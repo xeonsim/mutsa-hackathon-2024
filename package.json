@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.9.3",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "firebase": "^10.12.4",
     "firebase-admin": "^12.3.0",
     "next": "14.2.5",
     "nookies": "^2.5.2",
     "react": "^18",
+    "react-big-scheduler": "^0.2.7",
     "react-dom": "^18"
   },
   "devDependencies": {

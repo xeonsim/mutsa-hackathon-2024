@@ -11,6 +11,12 @@ export default function MyPage() {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    deposit: 0,
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,10 +24,7 @@ export default function MyPage() {
       if (userAuth) {
         const ref = doc(db, "users", userAuth.uid);
         getDoc(ref).then((res) => {
-          const data = res.data();
-          setUserName(data.name);
-          setUserEmail(data.email);
-          setUserPhone(data.phone);
+          setUserData(res.data());
         });
       } else {
         router.push("/");
@@ -41,19 +44,27 @@ export default function MyPage() {
               <h3 className="text-xl font-semibold text-secondary-700 mb-2">
                 닉네임
               </h3>
-              <p className="text-secondary-500 text-lg">{userName}</p>
+              <p className="text-secondary-500 text-lg">{userData.name}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-secondary-700 mb-2">
                 이메일
               </h3>
-              <p className="text-secondary-500 text-lg">{userEmail}</p>
+              <p className="text-secondary-500 text-lg">{userData.email}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-secondary-700 mb-2">
                 전화번호
               </h3>
-              <p className="text-secondary-500 text-lg">{userPhone}</p>
+              <p className="text-secondary-500 text-lg">{userData.phone}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-secondary-700 mb-2">
+                보증금
+              </h3>
+              <p className="text-secondary-500 text-lg">
+                {userData.deposit.toLocaleString()}
+              </p>
             </div>
           </div>
           <div className="absolute bottom-6 right-6">

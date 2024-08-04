@@ -65,6 +65,7 @@ export default function Signup() {
                   name: inputs.name.value,
                   email: inputs.email.value,
                   phone: phoneNum,
+                  deposit: 1000000,
                 };
                 setSubmitted(true);
                 createUserWithEmailAndPassword(

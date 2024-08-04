@@ -75,22 +75,26 @@ export default async function Home() {
                 </h2>
                 <div className="space-y-6 text-secondary-500">
                   <p className="text-secondary-500">
-                    <span className="font-medium">운동:</span>{" "}
+                    <span className="font-medium">운동:</span>
                     {e.exercise.join(", ")}
                   </p>
                   <div className="flex justify-between">
                     <p>
-                      <span className="font-medium">멤버수:</span>{" "}
+                      <span className="font-medium">멤버수:</span>
                       {e.members.length}/{e.people}
                     </p>
                     <p>
-                      <span className="font-medium">보증금:</span>{" "}
+                      <span className="font-medium">보증금:</span>
                       {e.deposit.toLocaleString()}원
+                    </p>
+                    <p>
+                      <span className="font-medium">Current Cash Pool:</span>
+                      {e.cashPool.toLocaleString()}원
                     </p>
                   </div>
                   <div className="flex justify-between">
                     <p>
-                      <span className="font-medium">시작일:</span>{" "}
+                      <span className="font-medium">시작일:</span>
                       {starttime.toISOString().slice(0, 10)}
                     </p>
                     <p>

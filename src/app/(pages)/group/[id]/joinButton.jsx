@@ -2,19 +2,29 @@
 
 import { useAuth } from "@/context/authProvider";
 import { db } from "@/firebase/firebaseClient";
-import { doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, increment, updateDoc } from "firebase/firestore";
 
-export function JoinButton({ groupId, members }) {
+export function JoinButton({ groupId, members, deposit }) {
   const currentAuth = useAuth();
-  const handleJoin = () => {
+  const handleJoin = async () => {
+    const res = confirm("가입시 보증금을 지불해야 합니다. 가입하시겠습니까?");
     if (members.includes(currentAuth.user.uid)) {
       alert("already joined!");
       return;
-    } else {
-      updateDoc(doc(db, "groups", groupId), {
-        members: [...members, currentAuth.user.uid],
+    } else if (!res) {
+      return;
+    } else if (res) {
+      updateDoc(doc(db, "users", currentAuth.user.uid), {
+        deposit: increment(-deposit),
       })
-        .then((e) => alert("joined!"))
+        .then((e) => {
+          updateDoc(doc(db, "groups", groupId), {
+            members: arrayUnion(currentAuth.user.uid),
+            cashPool: increment(deposit),
+          })
+            .then((e) => alert("joined!"))
+            .catch((e) => console.log(e));
+        })
         .catch((e) => console.log(e));
     }
   };

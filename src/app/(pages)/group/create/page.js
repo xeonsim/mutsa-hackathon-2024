@@ -2,7 +2,14 @@
 "use client";
 import { useAuth } from "@/context/authProvider";
 import { db } from "@/firebase/firebaseClient";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  increment,
+  updateDoc,
+} from "firebase/firestore";
 import { useState } from "react";
 
 export default function Page() {
@@ -25,27 +32,39 @@ export default function Page() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      selectedExercises,
-      deposit,
-      duration,
-      people,
-      currentAuth.user.uid
+    const res = confirm(
+      "그룹 생성 시 보증금을 지불해야 합니다. 생성하시겠습니까?"
     );
-    const today = new Date();
-    addDoc(collection(db, "groups"), {
-      name: name,
-      exercise: selectedExercises,
-      deposit: deposit,
-      duration: duration,
-      people: people,
-      minFulfill: minFulfill,
-      timestamp: today.getTime(),
-      creator: currentAuth.user.uid,
-      members: [currentAuth.user.uid],
-    })
-      .then(() => alert("success"))
-      .catch((e) => console.log(e));
+    if (!res) {
+      return;
+    } else {
+      const today = new Date();
+      getDoc(doc(db, "users", currentAuth.user.uid)).then((res) => {
+        const userData = res.data();
+        if (userData.deposit - deposit > 0) {
+          updateDoc(doc(db, "users", currentAuth.user.uid), {
+            deposit: increment(-deposit),
+          })
+            .then((e) =>
+              addDoc(collection(db, "groups"), {
+                name: name,
+                exercise: selectedExercises,
+                deposit: deposit,
+                duration: duration,
+                people: people,
+                minFulfill: minFulfill,
+                timestamp: today.getTime(),
+                creator: currentAuth.user.uid,
+                members: [currentAuth.user.uid],
+                cashPool: deposit,
+              })
+                .then(() => alert("success"))
+                .catch((e) => console.log(e))
+            )
+            .catch((e) => console.log(e));
+        }
+      });
+    }
   };
 
   return (

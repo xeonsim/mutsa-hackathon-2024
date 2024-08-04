@@ -91,6 +91,8 @@ const ExerciseForm = (props) => {
     } else {
       console.log(exercises);
       const time = new Date();
+      const userData = await getDoc(doc(db, "users", currentAuth.user.uid));
+      const user = userData.data();
       addDoc(
         collection(
           db,
@@ -100,6 +102,7 @@ const ExerciseForm = (props) => {
         ),
         {
           date: date,
+          name: user.name,
           description: description,
           exercises: exercises,
           timestamp: time.getTime(),
