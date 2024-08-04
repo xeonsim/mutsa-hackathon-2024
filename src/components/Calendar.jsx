@@ -7,22 +7,25 @@ import { getDocs, collection } from "firebase/firestore";
 export function GroupCalendar({ groupId, members }) {
   const [event, setEvent] = useState([]);
   useEffect(() => {
-    members.map(async (member) => {
+    let events = [];
+    const promises = members.map(async (member) => {
       const declarationData = await getDocs(
         collection(db, "declarations", groupId, member)
       );
 
-      const events = declarationData.docs.map((e) => {
+      declarationData.docs.map((e) => {
         const data = e.data();
-        return {
+        events.push({
           event_id: e.id,
           title: data.name,
           start: new Date(data.date),
           end: new Date(data.date),
           color: data.fulfilled ? "#3B82F6" : "#ef4444",
-        };
+        });
       });
-      setEvent([...event, ...events]);
+    });
+    Promise.all(promises).then((e) => {
+      setEvent(events);
     });
   }, []);
   return (
