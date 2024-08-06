@@ -90,8 +90,8 @@ export const Navbar = () => {
         }
       >
         <Link href="/" className="flex items-center space-x-3 pt-5 pb-10">
-          <Image src={LogoImage} width={100} height={100} />
-          <Image src={LogoText} width={150} height={100} />
+          <Image src={LogoImage} width={75} height={75} />
+          <Image src={LogoText} width={120} height={100} />
         </Link>
 
         {/* Mobile Navigation Items */}
