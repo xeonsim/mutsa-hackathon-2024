@@ -41,10 +41,45 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
      }
   };
 
+  const getModelUrl = (exerciseType)=>{
+    switch(exerciseType){
+        // "스쿼트", "런지", "푸시업", "브이업",'파이크 푸시업', '레그레이즈'
+        case '스쿼트':
+            return "/models/squat/model.json";
+        case '런지':
+            return "/models/lunge/model.json";
+        case '푸시업':
+            return "/models/pushup/model.json";
+        case '브이업':
+            return "/models/vup/model.json";
+        case '파이크 푸시업':
+            return '/models/pike/model.json';
+        case '레그레이즈':
+            return '/models/legraise/model.json';        
+    }
+  }
+  const getMetadataUrl = (exerciseType)=>{
+    switch(exerciseType){
+        // "스쿼트", "런지", "푸시업", "브이업",'파이크 푸시업', '레그레이즈'
+        case '스쿼트':
+            return "/models/squat/metadata.json";
+        case '런지':
+            return "/models/lunge/metadata.json";
+        case '푸시업':
+            return "/models/pushup/metadata.json";
+        case '브이업':
+            return "/models/vup/metadata.json";
+        case '파이크 푸시업':
+            return '/models/pike/metadata.json';
+        case '레그레이즈':
+            return '/models/legraise/metadata.json';        
+    }
+  }
+
   useEffect(() => {
     async function init() {
-      const modelURL = "/models/squat/model.json";
-      const metadataURL = "/models/squat/metadata.json";
+      const modelURL = getModelUrl(exerciseType);
+      const metadataURL = getMetadataUrl(exerciseType);
 
       // Load the model and metadata
       const loadedModel = await tmPose.load(modelURL, metadataURL);
