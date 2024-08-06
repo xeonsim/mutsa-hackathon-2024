@@ -30,7 +30,7 @@ export function GroupCalendar({ groupId, members }) {
   }, []);
   return (
     <Scheduler
-    className='z-0'
+     className='z-0'
       view="month"
       agenda={false}
       disableViewNavigator={true}

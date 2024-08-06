@@ -59,14 +59,14 @@ export default async function Page(props) {
           </Link>
         )}
       </div>
-      <div className="mt-6">
+      {groupDetail.members.includes(uid)&&<div className="mt-6">
         <h3 className="text-xl font-semibold text-secondary-700 mb-4">
           내 정보
         </h3>
         <div className="space-y-4">
           <MemberCard uid={uid} groupId={props.params.id} />
         </div>
-      </div>
+      </div>}
       <div className="mt-6">
         <h3 className="text-xl font-semibold text-secondary-700 mb-4">
           다른 멤버
