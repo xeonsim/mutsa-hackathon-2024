@@ -27,7 +27,7 @@ export default async function Page(props) {
 
   return (
     <div className="container mx-auto px-layout">
-      <GroupCalendar groupId={props.params.id} members={groupDetail.members} />
+      <GroupCalendar groupId={props.params.id} members={groupDetail.members} className='z-0'/>
       <div className="bg-white shadow-md rounded-layout p-layout mb-layout">
         <h2 className="text-2xl font-bold text-secondary-700 mb-4">
           {groupDetail.name}
@@ -42,7 +42,7 @@ export default async function Page(props) {
           보증금: {groupDetail.deposit.toLocaleString()}원
         </p>
         <p className="text-secondary-500 mb-2">
-          합계: {groupDetail.cashPool.toLocaleString()}원
+          총합: {groupDetail.cashPool.toLocaleString()}원
         </p>
         <p className="text-secondary-500 mb-2">
           기간: {groupDetail.duration}주

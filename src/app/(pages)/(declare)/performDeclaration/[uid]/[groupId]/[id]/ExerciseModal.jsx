@@ -161,12 +161,10 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
 
   return (
     <>
-      {/* 아무곳이나 눌러도 알림 창 사라지게 */}
-
       <div
         style={{
           position: "fixed",
-          top: showModal ? "0" : "-100px",
+          top: showModal ? "0" : "-100%",
           left: "0",
           right: "0",
           bottom: "0",
@@ -175,59 +173,61 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
           alignItems: "center",
           opacity: showModal ? "1" : "0",
           pointerEvents: showModal ? "auto" : "none",
-          transition: "all 0.1s ease-in-out",
-          cursor: "default",
+          transition: "all 0.3s ease-in-out",
           zIndex: 15,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
       >
-        <div
-          style={{
-            marginTop: "10vh",
-            backgroundColor: "#6B7280",
-            padding: "10px",
-            borderRadius: "5px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "80%",
-            height: "80%",
-            position: "relative",
-          }}
-        >
-          <div className="text-black text-2xl font-bold mb-6">수행하기</div>
-          <div className="text-black text-lg font-semibold mb-3">
-            <h1>Pose Detection</h1>
-            <div className='flex justify-between p-3'>
-                <canvas width={300} height={300} ref={canvasRef} id="canvas"></canvas>
-                <div>
-                    {/* <div className='text-md'>
-                        {labels.map((el,index)=><div key={index}>{el.className}: {el.probability.toFixed(2)}</div>)}
-                    </div> */}
-                    <div>Count: {count.current}</div>
-                    <div>Status: {status.current}</div>
+        <div className="container mx-auto px-4 py-8 max-w-3xl">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-secondary-700 mb-4">Exercise Check</h2>
+              
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-secondary-700 mb-2">{exerciseType}</h3>
+                <p className="text-secondary-500 mb-2">Goal: {minCount} reps</p>
+              </div>
+
+              <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div className="w-full md:w-1/2 mb-4 md:mb-0">
+                  <canvas
+                    width={300}
+                    height={300}
+                    ref={canvasRef}
+                    id="canvas"
+                    className="mx-auto border border-secondary-200 rounded-lg"
+                  ></canvas>
                 </div>
+                <div className="w-full md:w-1/2 pl-0 md:pl-6">
+                  <div className="bg-secondary-100 p-4 rounded-lg">
+                    <p className="text-lg font-semibold mb-2">Count: <span className="text-primary-500">{count.current}</span></p>
+                    <p className="text-lg font-semibold">Status: <span className="text-accent-500">{status.current}</span></p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <button
+                  className="bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300"
+                  onClick={handleConfirm}
+                >
+                  Confirm
+                </button>
+                <button
+                  className="bg-danger-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-danger-700 transition duration-300"
+                  onClick={close}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-row">
-            <button
-              className="bg-green-500 rounded-lg text-center text-white font-bold mt-3 w-24 p-2 mr-3"
-              onClick={handleConfirm}
-            >
-              CONFIRM
-            </button>
-            <button
-              className="bg-red-500 rounded-lg text-center text-white font-bold mt-3 w-20 p-2"
-              onClick={close}
-            >
-              CANCEL
-            </button>
           </div>
         </div>
       </div>
     </>
   );
 };
+
 
 const confirmModal = (onConfirm, exerciseType, minCount) => {
   const handleClose = () => {
