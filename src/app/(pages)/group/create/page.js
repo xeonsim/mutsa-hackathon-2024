@@ -98,7 +98,7 @@ export default function Page() {
             운동
           </label>
           <div className="flex flex-wrap gap-4">
-            {["스쿼트", "런지", "푸시업", "브릿지"].map((exercise) => (
+            {["스쿼트", "런지", "푸시업", "브이업",'파이크 푸시업', '레그레이즈'].map((exercise) => (
               <label key={exercise} className="inline-flex items-center">
                 <input
                   type="checkbox"
