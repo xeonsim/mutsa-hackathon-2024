@@ -65,7 +65,7 @@ export default function Page() {
                 보증금: {el.deposit.toLocaleString()}원
               </p>
               <p className="text-secondary-500 mb-2">
-                Current Cash Pool: {el.cashPool.toLocaleString()}원
+                총합: {el.cashPool.toLocaleString()}원
               </p>
               <p className="text-secondary-500 mb-2">기간: {el.duration}주</p>
               <p className="text-secondary-500 mb-2">인원: {el.people}명</p>
@@ -73,7 +73,7 @@ export default function Page() {
                 className={
                   el.members.includes(currentAuth.user.uid)
                     ? "text-accent-500 font-semibold"
-                    : "text-secondary-500"
+                    : "text-danger-500"
                 }
               >
                 {el.members.includes(currentAuth.user.uid)

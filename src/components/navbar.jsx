@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { auth } from "@/firebase/firebaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
@@ -9,6 +10,8 @@ import LogoImage from "../../public/aichImage.png";
 import LogoText from "../../public/aichText.png";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+
   const [logggedIn, setLogggedIn] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,16 +30,19 @@ export const Navbar = () => {
     setNav(!nav);
   };
 
+  if (pathname === "/login" || pathname === "/signup") {
+    return null;
+  }
+
   return (
-    <nav className="bg-secondary-100 flex justify-between items-center h-24 mx-auto px-4 text-white">
-      {/* Logo */}
+    <nav className="bg-purple-100 flex justify-between items-center h-24 mx-auto px-4 text-white">
       <Link href="/" className="flex items-center space-x-1">
-          <Image src={LogoImage} width={100} height={100}/>
-          <Image src={LogoText} width={150} height={100}/>
+        <Image src={LogoImage} width={70} height={70} />
+        <Image src={LogoText} width={110} height={90} />
       </Link>
 
       {/* Desktop Navigation */}
-      <ul className="hidden md:flex bg-secondary-100 items-center">
+      <ul className="hidden md:flex bg-purple-100 items-center">
         <NavItems logggedIn={logggedIn}></NavItems>
       </ul>
 
@@ -83,10 +89,9 @@ export const Navbar = () => {
             : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%] flex flex-col items-center z-50 space-y-3"
         }
       >
-        {/* Mobile Logo */}
         <Link href="/" className="flex items-center space-x-3 pt-5 pb-10">
-          <Image src={LogoImage} width={100} height={100}/>
-          <Image src={LogoText} width={150} height={100}/>
+          <Image src={LogoImage} width={100} height={100} />
+          <Image src={LogoText} width={150} height={100} />
         </Link>
 
         {/* Mobile Navigation Items */}
@@ -102,7 +107,7 @@ function NavItems({ logggedIn }) {
       <li>
         <Link
           href="/"
-          className="font-bold block m-3 mx-6 text-white hover:text-primary-500"
+          className="font-bold block m-3 mx-6 text-purple-500 hover:text-purple-700"
         >
           Home
         </Link>
@@ -110,7 +115,7 @@ function NavItems({ logggedIn }) {
       <li>
         <Link
           href="/group"
-          className="font-bold block m-3 mx-6 text-white hover:text-primary-500"
+          className="font-bold block m-3 mx-6 text-purple-500 hover:text-purple-700"
         >
           Groups
         </Link>
@@ -118,7 +123,10 @@ function NavItems({ logggedIn }) {
       <li>
         {!logggedIn ? (
           <div>
-            <Link href="/login">
+            <Link
+              href="/login"
+              className="font-bold block m-3 mx-6 text-purple-500 hover:text-purple-700"
+            >
               <span>LOGIN</span>
             </Link>
           </div>
@@ -128,7 +136,7 @@ function NavItems({ logggedIn }) {
               viewBox="0 0 448 512"
               width="20px"
               height="20px"
-              fill="#ffffff"
+              fill="#374151"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path>

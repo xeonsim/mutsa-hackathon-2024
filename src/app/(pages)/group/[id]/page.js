@@ -32,7 +32,9 @@ export default async function Page(props) {
         <h2 className="text-2xl font-bold text-secondary-700 mb-4">
           {groupDetail.name}
         </h2>
-        <p className="text-secondary-500 mb-2">Creator: {creatorDetail.name}</p>
+        <p className="text-secondary-500 mb-2">
+          그룹 주인: {creatorDetail.name}
+        </p>
         <p className="text-secondary-500 mb-2">
           운동: {groupDetail.exercise.join(", ")}
         </p>
@@ -40,7 +42,7 @@ export default async function Page(props) {
           보증금: {groupDetail.deposit.toLocaleString()}원
         </p>
         <p className="text-secondary-500 mb-2">
-          Current Cash Pool: {groupDetail.cashPool.toLocaleString()}원
+          합계: {groupDetail.cashPool.toLocaleString()}원
         </p>
         <p className="text-secondary-500 mb-2">
           기간: {groupDetail.duration}주

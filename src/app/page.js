@@ -25,6 +25,13 @@ export default async function Home() {
       return { id: e.id, ...data };
     });
 
+    const getColorByProgress = (progress) => {
+      if (progress < 25) return "bg-purple-200";
+      if (progress < 50) return "bg-purple-300";
+      if (progress < 75) return "bg-purple-400";
+      return "bg-purple-500";
+    };
+
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-3xl font-bold text-secondary-700 mb-6 text-center">
@@ -68,69 +75,75 @@ export default async function Home() {
               <Link
                 key={i}
                 href={`/group/${e.id}`}
-                className="block bg-white shadow-md rounded-layout p-8 hover:shadow-lg transition duration-300"
+                className="block bg-white shadow-md rounded-layout p-8 hover: shadow-lg transition duration-300"
               >
                 <h2 className="text-2xl font-semibold text-secondary-700 mb-2">
                   {e.name}
                 </h2>
-                <div className="space-y-6 text-secondary-500">
-                  <p className="text-secondary-500">
-                    <span className="font-medium">운동:</span>
-                    {e.exercise.join(", ")}
-                  </p>
+                <div className="space-y-3 text-secondary-700">
                   <div className="flex justify-between">
                     <p>
-                      <span className="font-medium">멤버수:</span>
+                      <span className="font-medium">운동: </span>
+                      {e.exercise.join(", ")}
+                    </p>
+                    <p>
+                      <span className="font-medium">보증금: </span>
+                      {e.deposit.toLocaleString()}원
+                    </p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>
+                      <span className="font-medium">멤버수: </span>
                       {e.members.length}/{e.people}
                     </p>
                     <p>
-                      <span className="font-medium">보증금:</span>
-                      {e.deposit.toLocaleString()}원
-                    </p>
-                    <p>
-                      <span className="font-medium">Current Cash Pool:</span>
+                      <span className="font-medium">총합: </span>
                       {e.cashPool.toLocaleString()}원
                     </p>
                   </div>
                   <div className="flex justify-between">
                     <p>
-                      <span className="font-medium">시작일:</span>
+                      <span className="font-medium">시작일: </span>
                       {starttime.toISOString().slice(0, 10)}
                     </p>
                     <p>
-                      <span className="font-medium">기간:</span> {e.duration}주
+                      <span className="font-medium">기간: </span> {e.duration}주
                     </p>
                   </div>
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium">기간 진행률:</span>
+                      <span className="font-medium">기간 진행률: </span>
                       <span>{Math.round(durationProgress)}%</span>
                     </div>
-                    <div className="w-full bg-secondary-200 rounded-full h-4">
+                    <div className="w-full bg-secondary-300 rounded-full h-4 relative overflow-hidden">
                       <div
-                        className="bg-primary-500 h-4 rounded-full transition-all duration-500"
-                        style={{ width: `${durationProgress}%` }}
+                        className={`absolute top-0 left-0 h-full rounded-full transition-all duration-500 ${getColorByProgress(
+                          durationProgress
+                        )}`}
+                        style={{ width: `${durationProgress}%`, zIndex: 10 }}
                       ></div>
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium">목표달성 진행률:</span>
+                      <span className="font-medium">목표달성 진행률: </span>
                       <span>
                         {done.length}/{e.minFulfill} (
                         {Math.round(achievementProgress)}%)
                       </span>
                     </div>
-                    <div className="w-full bg-secondary-200 rounded-full h-4">
+                    <div className="w-full bg-secondary-300 rounded-full h-4 relative overflow-hidden">
                       <div
-                        className="bg-accent-500 h-4 rounded-full transition-all duration-500"
-                        style={{ width: `${achievementProgress}%` }}
+                        className={`absolute top-0 left-0 h-full rounded-full transition-all duration-500 ${getColorByProgress(
+                          achievementProgress
+                        )}`}
+                        style={{ width: `${achievementProgress}%`, zIndex: 10 }}
                       ></div>
                     </div>
                   </div>
                 </div>
                 <div className="mt-6 text-center">
-                  <span className="inline-block bg-primary-500 text-white font-bold py-3 px-6 rounded-layout hover:bg-primary-700 transition duration-300">
+                  <span className="inline-block bg-purple-500 text-white font-bold py-3 px-6 rounded-layout hover:bg-purple-700 transition duration-300">
                     자세히 보기
                   </span>
                 </div>
