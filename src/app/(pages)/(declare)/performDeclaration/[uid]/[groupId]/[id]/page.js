@@ -8,5 +8,5 @@ export default async function Page(props) {
   const declarationData = await getDoc(doc(db,'declarations', props.params.groupId,props.params.uid,props.params.id));
   const declaration = declarationData.data();
   console.log(declaration)
-  return <ExerciseAccordion exercises={declaration.exercises}/>;
+  return <ExerciseAccordion exercises={declaration.exercises} groupId={props.params.groupId} uid={props.params.uid} id={props.params.id}/>;
 }
