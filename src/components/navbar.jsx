@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { auth } from "@/firebase/firebaseClient";
 import { onAuthStateChanged } from "firebase/auth";
+import Image from "next/image";
+import LogoImage from "../../public/aichImage.png";
+import LogoText from "../../public/aichText.png";
 
 export const Navbar = () => {
   const [logggedIn, setLogggedIn] = useState(false);
@@ -25,16 +28,15 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="bg-slate-900 flex justify-between items-center h-24 mx-auto px-4 text-white">
+    <nav className="bg-secondary-100 flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
-      <Link href="/" className="flex items-center space-x-3">
-        <h1 className="self-center md:text-2xl text-lg font-semibold whitespace-nowrap text-white">
-          LOGO
-        </h1>
+      <Link href="/" className="flex items-center space-x-1">
+          <Image src={LogoImage} width={100} height={100}/>
+          <Image src={LogoText} width={150} height={100}/>
       </Link>
 
       {/* Desktop Navigation */}
-      <ul className="hidden md:flex bg-slate-900 items-center">
+      <ul className="hidden md:flex bg-secondary-100 items-center">
         <NavItems logggedIn={logggedIn}></NavItems>
       </ul>
 
@@ -77,15 +79,14 @@ export const Navbar = () => {
         onClick={handleNav}
         className={
           nav
-            ? "fixed md:hidden left-0 top-0 w-[55%] h-full border-r border-r-gray-900 bg-slate-900 ease-in-out duration-500 flex flex-col items-center z-50 space-y-3"
+            ? "fixed md:hidden left-0 top-0 w-[55%] h-full border-r border-r-gray-900 bg-secondary-100 ease-in-out duration-500 flex flex-col items-center z-50 space-y-3"
             : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%] flex flex-col items-center z-50 space-y-3"
         }
       >
         {/* Mobile Logo */}
         <Link href="/" className="flex items-center space-x-3 pt-5 pb-10">
-          <h1 className="self-center md:text-2xl text-lg font-semibold whitespace-nowrap text-white">
-            LOGO
-          </h1>
+          <Image src={LogoImage} width={100} height={100}/>
+          <Image src={LogoText} width={150} height={100}/>
         </Link>
 
         {/* Mobile Navigation Items */}
@@ -101,7 +102,7 @@ function NavItems({ logggedIn }) {
       <li>
         <Link
           href="/"
-          className="font-bold block m-3 mx-6 text-white hover:text-yellow-300"
+          className="font-bold block m-3 mx-6 text-white hover:text-primary-500"
         >
           Home
         </Link>
@@ -109,7 +110,7 @@ function NavItems({ logggedIn }) {
       <li>
         <Link
           href="/group"
-          className="font-bold block m-3 mx-6 text-white hover:text-yellow-300"
+          className="font-bold block m-3 mx-6 text-white hover:text-primary-500"
         >
           Groups
         </Link>
