@@ -6,16 +6,22 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleConfirm = () => {
-    setShowModal(false);
+  
     setTimeout(async() => {
         if(count.current >= minCount){
         onConfirm();
         if(webcam.current){
             webcam.current.stop();
         }
+        setTimeout(() => handleClose(), 1);
+        setShowModal(false);
+      }else{
+        const res = confirm('모든 횟수를 채우지 못하면 완료 처리되지 않습니다. 종료하시겠습니까?');
+        if(res){
+            setTimeout(() => handleClose(), 1);
+            setShowModal(false);
+        }
       }}, 1);
-    setTimeout(() => handleClose(), 1);
-   
   };
 
 
@@ -34,11 +40,15 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
   const count = useRef(0);
   
   const close = async () => {
-    setTimeout(() => handleClose(), 1);
-    setShowModal(false);
-    if(webcam.current){
-        await webcam.current.stop();
-     }
+    const res = confirm('모든 횟수를 채우지 못하면 완료 처리되지 않습니다. 종료하시겠습니까?');
+    if(res){
+        setTimeout(() => handleClose(), 1);
+        setShowModal(false);
+        if(webcam.current){
+            await webcam.current.stop();
+        }
+    }
+    
   };
 
   const getModelUrl = (exerciseType)=>{
