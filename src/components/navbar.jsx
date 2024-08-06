@@ -31,7 +31,7 @@ export const Navbar = () => {
     <nav className="bg-secondary-100 flex justify-between items-center h-24 mx-auto px-4 text-white">
       {/* Logo */}
       <Link href="/" className="flex items-center space-x-1">
-          <Image src={LogoImage} width={100} height={100}/>
+          <Image src={LogoImage} alt="logo" width={100} height={100}/>
           <Image src={LogoText} width={150} height={100}/>
       </Link>
 
@@ -85,7 +85,7 @@ export const Navbar = () => {
       >
         {/* Mobile Logo */}
         <Link href="/" className="flex items-center space-x-3 pt-5 pb-10">
-          <Image src={LogoImage} width={100} height={100}/>
+          <Image src={LogoImage} alt="logo" width={100} height={100}/>
           <Image src={LogoText} width={150} height={100}/>
         </Link>
 
