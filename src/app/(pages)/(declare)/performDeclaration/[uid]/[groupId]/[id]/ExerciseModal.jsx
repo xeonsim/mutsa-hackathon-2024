@@ -171,6 +171,7 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
           opacity: showModal ? "1" : "0",
           pointerEvents: showModal ? "auto" : "none",
           transition: "all 0.3s ease-in-out",
@@ -178,35 +179,35 @@ const ConfirmModal = ({exerciseType, minCount ,onConfirm, handleClose }) => {
           backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
       >
-        <div className="container mx-auto px-4 py-8 max-w-3xl">
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-secondary-700 mb-4">Exercise Check</h2>
+              <h2 className="text-2xl font-bold text-secondary-700 mb-4 text-center">Exercise Check</h2>
               
-              <div className="mb-6">
+              <div className="mb-6 text-center">
                 <h3 className="text-xl font-semibold text-secondary-700 mb-2">{exerciseType}</h3>
                 <p className="text-secondary-500 mb-2">Goal: {minCount} reps</p>
               </div>
 
-              <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-                <div className="w-full md:w-1/2 mb-4 md:mb-0">
+              <div className="flex flex-col items-center mb-6">
+                <div className="w-full max-w-md mb-4">
                   <canvas
-                    width={300}
-                    height={300}
+                    width={400}
+                    height={400}
                     ref={canvasRef}
                     id="canvas"
                     className="mx-auto border border-secondary-200 rounded-lg"
                   ></canvas>
                 </div>
-                <div className="w-full md:w-1/2 pl-0 md:pl-6">
-                  <div className="bg-secondary-100 p-4 rounded-lg">
+                <div className="w-full max-w-md">
+                  <div className="bg-secondary-100 p-4 rounded-lg text-center">
                     <p className="text-lg font-semibold mb-2">Count: <span className="text-primary-500">{count.current}</span></p>
                     <p className="text-lg font-semibold">Status: <span className="text-accent-500">{status.current}</span></p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+              <div className="flex justify-center space-x-4">
                 <button
                   className="bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300"
                   onClick={handleConfirm}

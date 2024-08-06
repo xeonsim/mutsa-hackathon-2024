@@ -26,38 +26,24 @@ export default async function Page(props) {
   const otherMembers = groupDetail.members.filter((e) => e != uid);
 
   return (
-    <div className="container mx-auto px-layout">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <GroupCalendar groupId={props.params.id} members={groupDetail.members} className='z-0'/>
-      <div className="bg-white shadow-md rounded-layout p-layout mb-layout">
-        <h2 className="text-2xl font-bold text-secondary-700 mb-4">
+      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h2 className="text-2xl font-bold text-secondary-700 mb-4 break-words">
           {groupDetail.name}
         </h2>
-        <p className="text-secondary-500 mb-2">
-          그룹 주인: {creatorDetail.name}
-        </p>
-        <p className="text-secondary-500 mb-2">
-          운동: {groupDetail.exercise.join(", ")}
-        </p>
-        <p className="text-secondary-500 mb-2">
-          보증금: {groupDetail.deposit.toLocaleString()}원
-        </p>
-        <p className="text-secondary-500 mb-2">
-          총합: {groupDetail.cashPool.toLocaleString()}원
-        </p>
-        <p className="text-secondary-500 mb-2">
-          기간: {groupDetail.duration}주
-        </p>
-        <p className="text-secondary-500 mb-2">
-          최대 인원: {groupDetail.people}명
-        </p>
-        <p className="text-secondary-500 mb-2">
-          현재 인원: {groupDetail.members.length}명
-        </p>
-        <p className="text-secondary-500 mb-2">
-          최소 달성 횟수: {groupDetail.minFulfill}회
-        </p>
+        <div className="space-y-2 text-secondary-500">
+          <p className="break-words">그룹 주인: {creatorDetail.name}</p>
+          <p>운동: {groupDetail.exercise.join(", ")}</p>
+          <p>보증금: {groupDetail.deposit.toLocaleString()}원</p>
+          <p>총합: {groupDetail.cashPool.toLocaleString()}원</p>
+          <p>기간: {groupDetail.duration}주</p>
+          <p>최대 인원: {groupDetail.people}명</p>
+          <p>현재 인원: {groupDetail.members.length}명</p>
+          <p>최소 달성 횟수: {groupDetail.minFulfill}회</p>
+        </div>
       </div>
-      <div className="mt-layout">
+      <div className="mt-6">
         {!groupDetail.members.includes(uid) ? (
           <JoinButton
             groupId={groupData.id}
@@ -67,13 +53,13 @@ export default async function Page(props) {
         ) : (
           <Link
             href={`/createDeclaration/${groupData.id}`}
-            className="bg-accent-500 text-white font-bold py-2 px-4 rounded-layout hover:bg-accent-700 transition duration-300"
+            className="inline-block bg-accent-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-accent-700 transition duration-300"
           >
             선언하기
           </Link>
         )}
       </div>
-      <div className="mt-layout">
+      <div className="mt-6">
         <h3 className="text-xl font-semibold text-secondary-700 mb-4">
           내 정보
         </h3>
@@ -81,7 +67,7 @@ export default async function Page(props) {
           <MemberCard uid={uid} groupId={props.params.id} />
         </div>
       </div>
-      <div className="mt-layout">
+      <div className="mt-6">
         <h3 className="text-xl font-semibold text-secondary-700 mb-4">
           다른 멤버
         </h3>
